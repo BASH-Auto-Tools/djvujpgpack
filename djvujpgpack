@@ -1,0 +1,27 @@
+#!/bin/bash
+# djvujpgpack v0.1 - script for pack jpeg files in one directory to djvu file
+# Author: Kurashov Artem
+# License: GNU GPLv3
+CURDIR=`pwd`
+if [ "$#" -lt 2 ]; then
+	echo "usage: djvujpgpack /path/to/dir/with/jpegs /path/to/new/djvu/file"
+	exit
+fi
+if [ "$#" -lt 3 ]; then
+	DECIBELVALUE=48
+else
+	DECIBELVALUE="$3"
+fi
+cd $1
+if [ "`ls *.JPG 2> /dev/null`" != "" ]; then
+	rename .JPG .jpg *.JPG
+fi
+while [ "`ls *\ * 2> /dev/null`" != ""  ]
+do
+	rename \  _ *
+done
+for jpgfile in `ls -1 *.jpg` ; do
+	c44 -decibel $DECIBELVALUE $jpgfile `basename $jpgfile .jpg`.djvu
+done
+cd $CURDIR
+djvm -c $2 `ls $1/*.djvu`

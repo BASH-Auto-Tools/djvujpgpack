@@ -1,0 +1,7 @@
+djvujpgpack - script for pack jpeg files in one directory to djvu file.
+usage: djvujpgpack /path/to/dir/with/jpegs /path/to/new/djvu/file
+
+Author: Kurashov Artem
+License: GNU GPLv3
+
+http://saahriktu.org
