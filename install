@@ -1,2 +1,2 @@
-#!/bin/bash
-cp djvujpgpack /usr/bin/
+#!/bin/sh
+cp -fv djvujpgpack /usr/bin/

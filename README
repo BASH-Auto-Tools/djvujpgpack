@@ -1,5 +1,10 @@
 djvujpgpack - script for pack jpeg files in one directory to djvu file.
-usage: djvujpgpack /path/to/dir/with/jpegs /path/to/new/djvu/file
+
+usage: djvujpgpack [options] /path/to/dir/with/jpegs name-new-file.djvu
+options:
+    -b N    DECIBEL VALUE, default=48
+    -d N    DPI VALUE, default=72
+    -l      LOSSLESS, default=LOSSY
 
 Author: Kurashov Artem
 License: GNU GPLv3
