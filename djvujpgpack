@@ -37,11 +37,11 @@ then
     exit
 fi
 cd "$SRCS"
-if [ "`ls *.JPG 2> /dev/null`" != "" ]
+if [ "$(ls *.JPG 2> /dev/null)" != "" ]
 then
     rename .JPG .jpg *.JPG
 fi
-while [ "`ls *\ * 2> /dev/null`" != ""  ]
+while [ "$(ls *\ * 2> /dev/null)" != ""  ]
 do
     rename \  _ *
 done
@@ -54,12 +54,9 @@ then
 else
     for jpgfile in $(ls -1 *.jpg)
     do
-        jpgsize=$(gm identify -format %G $jpgfile)
-        gm convert -size $jpgsize xc:white $jpgfile.pbm
-        cjb2 -dpi "$DPI" $jpgfile.pbm $jpgfile.sjbz.djvu
-        rm $jpgfile.pbm
-        djvumake $jpgfile.djvu INFO=,,"$DPI" Sjbz=$jpgfile.sjbz.djvu BGjp=$jpgfile
-        rm $jpgfile.sjbz.djvu
+        jpgwidth=$(gm identify -format %w $jpgfile)
+        jpgheight=$(gm identify -format %h $jpgfile)
+        djvumake $jpgfile.djvu INFO="$jpgwidth","$jpgheight","$DPI" BGjp=$jpgfile
     done
 fi
 djvm -c "$CURDIR/$DEST" *.djvu && rm *.djvu
